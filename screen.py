@@ -1,9 +1,11 @@
 from tkinter import *
-from screens import *
+from windows import *
 
-class Window(Frame):
+class Screen(Windows):
 	def __init__(self, master=None):
-		super(Main, self).__init__()
+		super(Screen, self).__init__()
 		self.master = master
 		self.master.title("Learn Python With Python")
-		Windows.s0()
+		self.pack(fill=BOTH, expand=1)
+		self.s0()
+		
