@@ -3,7 +3,7 @@ from windows import *
 
 class Screen(Windows):
 	def __init__(self, master=None):
-		super(Screen, self).__init__()
+		super(Screen, self).__init__(master)
 		self.master = master
 		self.master.title("Learn Python With Python")
 		self.pack(fill=BOTH, expand=1)
