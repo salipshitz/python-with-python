@@ -1,4 +1,5 @@
 from tkinter import *
+from PIL import Image
 from abc import ABC
 
 class Windows(Frame, ABC):
@@ -33,8 +34,16 @@ class Windows(Frame, ABC):
                 for widget in self.winfo_children():
                         widget.destroy()
                 self.btnQuit()
-        
-        
+                if self.logoimg is not None:
+                        self.logoview.setimage(self.logoimg)
+                elif None not in [self.logoview, self.logopath]:
+                        self.logoimg = Image(self.logopath)
+                        if type(self.logoview) is ImageView:
+                                self.logoview.setimage(self.logoimg)
+                        else:
+                                raise TypeError("Windows.logoview not of ImageView type")
+                else:
+                        raise ValueError("Windows.logoview or Windows.logopath equal None")
         
         def s0(self):
                 self.new()
