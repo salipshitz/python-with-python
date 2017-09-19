@@ -7,7 +7,7 @@ setup(
     zipFile = None
     windows = [{
         "script": "mainloop",
-        "icon_resources": [(1, "icon.ico")]
+        "icon_resources": [(1, "pycon-icon.ico")]
         "dest_base": "LearnPythonWithPython"
     }]
 )
