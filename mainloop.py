@@ -1,3 +1,5 @@
+# DO NOT EDIT!!!
+
 from tkinter import Tk
 from screen import *
 
