@@ -1,8 +1,6 @@
 from tkinter import *
-from PIL import Image
-from abc import ABC
 
-class Windows(Frame, ABC):
+class Windows(Frame):
         def __init__(self, master=None):
                super(Windows, self).__init__()
         
@@ -21,6 +19,9 @@ class Windows(Frame, ABC):
                 
         def btnQuit(self):
                 return self.choBtn("Quit", self.close_app, 0, 0)
+
+        def btnBack(self):
+                return self.choBtn("Back", self.s0, 0, 0)
                 
         def choLbl(self, txt, x, y):
                 lbl = Label(self, text=txt)
@@ -34,21 +35,12 @@ class Windows(Frame, ABC):
                 for widget in self.winfo_children():
                         widget.destroy()
                 self.btnQuit()
-                if self.logoimg is not None:
-                        self.logoview.setimage(self.logoimg)
-                elif None not in [self.logoview, self.logopath]:
-                        self.logoimg = Image(self.logopath)
-                        if type(self.logoview) is ImageView:
-                                self.logoview.setimage(self.logoimg)
-                        else:
-                                raise TypeError("Windows.logoview not of ImageView type")
-                else:
-                        raise ValueError("Windows.logoview or Windows.logopath equal None")
-        
+                        
         def s0(self):
                 self.new()
                 self.cenLbl("Hello. Welcome to LearningPythonWithPython")
-                self.cenBtn("Lesson 1: Setting up the IDE", s1)
+                self.cenBtn("Lesson 1: Setting up the IDE", self.idle)
         
-        def s1(self):
-                
+        def idle(self):
+                self.new()
+                self.cenLbl("Hello")
