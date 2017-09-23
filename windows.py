@@ -38,7 +38,7 @@ class Windows(Frame):
                 return Label(self, text=txt).pack()
 
         def multiLbl(self, txt):
-                return Label(self, text=txt, anchor=W, wraplength=450).pack()
+                return Label(self, text=txt, anchor=W, wraplength=425).pack()
                 
         def new(self, home=False):
                 for widget in self.winfo_children():
