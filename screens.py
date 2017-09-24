@@ -1,7 +1,7 @@
 from tkinter import *
-from windows import *
+from window import Window
 
-class Screen(Windows):
+class Screens(Window):
         def __init__(self, master=None):
                 super(Screen, self).__init__(master)
                 self.master = master
