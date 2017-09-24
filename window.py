@@ -1,8 +1,9 @@
 from tkinter import *
 
-class Windows(Frame):
+class Window(Frame):
         def __init__(self, master=None):
                super(Windows, self).__init__()
+               self.s_init
         
         def close_app(self):
                 self.master.destroy()
