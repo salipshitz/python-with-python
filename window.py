@@ -2,8 +2,8 @@ from tkinter import *
 
 class Window(Frame):
         def __init__(self, master=None):
-               super(Windows, self).__init__()
-               self.s_init
+               super(Window, self).__init__()
+               self.s_init()
         
         def close_app(self):
                 self.master.destroy()
@@ -22,7 +22,7 @@ class Window(Frame):
                 return self.choBtn("Quit", self.close_app, 0, 0)
 
         def btnBack(self):
-                return self.choBtn("Back", self.s0, 0, 0)
+                return self.choBtn("Back", self.s_init, 0, 0)
 
         def btnNext(self, nextScreen):
                 return Button(self, text="Next", command=nextScreen).place(relx=1.0, rely=1.0, anchor=SE)
