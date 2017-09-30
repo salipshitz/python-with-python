@@ -17,7 +17,10 @@ class Screens(Window):
                         Screen(2, "Basic syntax", self.syn),
                         Screen(3, "Variables", self.var),
                         Screen(4, "Data types", self.data_types),
-                        Screen(5, "Hello, world!", self.hello_world)
+                        Screen(5, "Hello, world!", self.hello_world),
+                        Screen(6, "Input", self.inp),
+                        Screen(7, "If statements", self.if_statement)
+                        Screen(8, "Else and elif statements", self.else_elif)
                 ]
 		
         def s_init(self):
@@ -57,5 +60,51 @@ class Screens(Window):
         def hello_world(self):
                 self.new()
                 self.cenLbl(self.s[4].text)
-                self.multiLbl("Hello world programs are usually the first to be learned because they are so simple, but why do they make them so simple? Those programs could be made harder and more fun by just a little bit. First things first, you need to know what a hello world program looks like, so look in the console. Go on. I'm not going anywhere. You want to be able to do that? Well, that sucks for you. This lesson is not about hello world. It's about the base methods in Python. \"What's a method?\" I hear you typing in the comments. Well, I'm not telling you. And also I don't read the comments. So sucks for you.\nSo any ways, there are many base methods >:(don't even try asking):< such as print and input. Print prints text to the console. Input asks the user for input. That simple. Well not really. In print you have to put () after it because it's a *method* and inside those parentheses put what you want to say (HAS TO BE AN STR), for example print(\"LearnPythonWithPython\" will print LearnPythonWithPython once you press the button)")
+                self.multiLbl("Hello world programs are usually the first to be learned because they are so simple, but why do they make them so simple? Those programs could be made harder and more fun by just a little bit. First things first, you need to know what a hello world program looks like, so look in the console. Go on. I'm not going anywhere. You want to be able to do that? Well, that sucks for you. This lesson is not about hello world. It's about the base methods in Python. \"What's a method?\" I hear you typing in the comments. Well, I'm not telling you. And also I don't read the comments. So sucks for you.\nSo any ways, there are many base methods >:(don't even try asking):< such as print and input. Print prints text to the console. Input asks the user for input. That simple. Well not really. In print you have to put () after it because it's a *method* and inside those parentheses put what you want to say (HAS TO BE AN STR (can be a variable)), for example print(\"LearnPythonWithPython\") will print LearnPythonWithPython. Seriously. Try it. PRESS LE BUTTON!!!")
+                self.cenBtn("print(\"LearnPythonWithPython\")", self.hello_world_code)
+                self.cenLbl("It's time for CHALLENGE TIME: Try to make a hello world program by declaring a variable called string and print()ing it")
+                self.btnPrev(self.data_types)
+                self.btnNext(self.inp)
+        
+        def inp(self):
+                self.new()
+                self.cenLbl(self.s[5].text)
+                self.multiLbl("Hello, world! That last (mini) project was fun...ish. We want to make programs with UI! We want user input() ... i mean interface lol lmao rofl lellellellellelelelelelllelleleellelelelellelelel. so user \"interface\" as they call it is an interface where users interact. Hey! There's another possible name! User Interaction stuf! well anyways, let's get to the point. The input() method is a good starting point for UI. It allows the user to enter ... wait for it ... input()! Inside the parentheses thingies, you have to type in what ever you want the computer to ask you. For instance, press the button that has a line of code on it.")
+                self.cenBtn("inp = input(\"Enter your input here: \")\nprint(inp)", self.inp_code)
+                self.cenLbl("Now you try to figure out a practical purpose for the input() method. Enter it in the comments (that I tooooootally read)")
+                self.btnPrev(self.hello_world)
+                self.btnNext(self.if_statement)
+        
+        def if_statement(self):
+                self.new()
+                self.cenLbl(self.s[6].text)
+                self.multiLbl("If statements determine *if* a condition (e.g. 1>2 is False and \"hello\" == \"hello\" is True) is True, then it does the stuff indented after the colon(:). One example is")
+                btnTxt = """if True:
+                \tprint(\"Yay! It's True!\")
+                if False:
+                \tprint(\":( It's False")
+                """
+                self.cenBtn(btnText, self.if_code)
+                self.btnPrev(self.inp)
+                self.btnNext(self.else_elif)
+        
+        def else_elif(self):
+                self.new()
+                self.cenLbl(self.s[7].text)
+                self.multiLbl("\"But ... what if you want to test if something you just tested is not True? Do you need another if statement with (whatever condition) == False?\" I hear you commenting in the comment section. Well, the answer is NO STUPID!!! THIS IS PROGRAMMING!!! AND THIS LESSON EXISTS!!! WHAT DID YOU THINK IT WOULD BE ABOUT??? The solution lies in else statements, which literally translate to ... else. You just type else: and then whatever the **** you want if it is false. \"But what if you want to have an if and else statement *inside* an else statement?\" The answer is THIS IS CODING YOU NOT SMART PERSON. And plus, it says it in the title. elif is short for else if which is short for else-erwise if this is true.")
+                self.btnPrev(self.if_statement)
                 
+        def hello_world_code(self):
+                print("LearnPythonWithPython")
+        
+        def inp_code(self):
+                inp = input("Enter your input here: ")
+                print(inp)
+                
+        def if_code(self):
+                if True:
+                        print("Yay! It's True!")
+                if False:
+                        print(":( It's False.")
+                
+                              
