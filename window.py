@@ -3,7 +3,7 @@ from tkinter import *
 class Window(Frame):
         def __init__(self, master=None):
                super(Window, self).__init__()
-               self.s_init()
+               self.s_init(1)
         
         def close_app(self):
                 self.master.destroy()
