@@ -22,10 +22,13 @@ class ProjectScreen:
                 super(ProjectScreen, self).__init(title, showAs, func)
 
 class Screens(Window):
+        homeBounds = "800x1000"
+        screenBounds = "800x400"
+        
         def new_lesson(self, unit, screenNum):
                 screenNum -= 1
-		unitStr = "self.u"+str(unit)
-		u = exec(unitStr)
+                unitStr = "self.u"+str(unit)
+                u = exec(unitStr)
                 self.new()
                 self.cenLbl(u[screenNum].text)
                 if screenNum > 0:
@@ -46,18 +49,24 @@ class Screens(Window):
                         Screen(5, "Hello, world!", self.hello_world),
                         Screen(6, "Input", self.inp),
                         Screen(7, "If statements", self.if_statement),
-                        Screen(8, "Else and elif statements", self.else_elif)
+                        Screen(8, "Else and elif statements", self.else_elif),
+                        Screen(9, "\"WHAT THE HECK IS A METHOD!?!?!?\" (your comments)", self.methods)
                 ]
-		
+                
         def s_init(self, unitNum):
                 self.new(home=True)
-		s = "self.unit_"+str(unitNum)+"()"
+                s = "self.unit_"+str(unitNum)+"()"
                 exec(s)
-		
-        def unit_1(self)
+                self.master.geometry(self.homeBounds)
+                
+        def unit_1(self):
                 for i in range(len(self.screens)):
                         s = self.u1[i]
-                        self.cenBtn(s.title, s.func)
+                        self.cenBtn(s.showAs, lambda: self.goTo(s.func))
+        
+        def goTo(self, func):
+                self.master.geometry(screenBounds)
+                func()
         
         def idle(self):
                 self.new_lesson(1)
@@ -70,8 +79,8 @@ class Screens(Window):
         def var(self):
                 self.new_lesson(3)
                 self.multiLbl("Just like literally every single coding language in the world (except for maybe like BASIC and Assembly) and for sure every C based coding language (hint hint: Python is a C-based language), there are variables. There are many different types of variables in Python. Some examples are booleans (coming from Boolean algebra), lambdas (from lambda calculus) and numbers (from litterally every single form of math). Unlike 6th grade math, 7th grade math, 8th grade math, 9th grade math (Algebra I), 10th grade math (Geometry), 11th grade math (Algebra II), 12th grade math(Trigonometry?), college math(Calculus, Linear algebra, etc, etc, etc, and etc.), and some high school and college science(physics), variables in coding can have names longer than 1 letter with subscript. The only downside is that it takes up memory, and it takes up soooo mmuch storage. Like entire bytes. Soooooooo much!!!")
-	
-	def data_types(self):
+
+        def data_types(self):
                 self.new_lesson(4)
                 self.multiLbl("As I said last lesson, variables can be mmmmmmaaaaaannnnnnyyyyyy different types of things. A variable can be an str which is an str-ing of text surrounded by quotes (e.g. \"Hello, world!\"), an int which is an int-eger (e.g. 42), a float which is a float-ing point number (e.g. 3.14159265358979323846264338327950288419716939937510), a boolean which is a boolean value (which is either True or False. I think it's False. Wait nevermind it's true.), an array which stores an array of values surrounded in brackets where all the values are seperated by ,s (e.g. [\"Why?\", \"Are we stronger than the elements?\", \"What's yellow and dangerous?\", \"What do you get when you multiply six by seven?\", \"How many Vogons does it take to change a lightbulb?\", \"How many roads must a man walk down?\", 42, True, [\"Waaaait... an array inside an array?\", \"that's cray-cray\"], \"Is the array done yet?\", False,...] you get the idea.), a dictionary which is basically a dictionary for variables (e.g. ages = {\"Bob\": 100, \"Me\": 11}) and sooooo on and soooo forth")
                 
@@ -81,9 +90,9 @@ class Screens(Window):
                 code = """
                 print("LearnPythonWithPython")
                 """
-                self.cenBtn(code, lambda: self.run(code))
+                self.cenBtn(code, lambda: exec(code))
                 self.cenLbl("It's time for CHALLENGE TIME: Try to make a hello world program by declaring a variable called string and print()ing it")
-        
+                
         def inp(self):
                 self.new_lesson(6)
                 self.multiLbl("Hello, world! That last (mini) project was fun...ish. We want to make programs with UI! We want user input() ... i mean interface lol lmao rofl lellellellellelelelelelllelleleellelelelellelelel. so user \"interface\" as they call it is an interface where users interact. Hey! There's another possible name! User Interaction stuf! well anyways, let's get to the point. The input() method is a good starting point for UI. It allows the user to enter ... wait for it ... input()! Inside the parentheses thingies, you have to type in what ever you want the computer to ask you. For instance, press the button that has a line of code on it.")
@@ -91,9 +100,9 @@ class Screens(Window):
                 inp = input("Enter your input here: ")
                 print(inp)
                 """
-                self.cenBtn(code, self.run(code)
+                self.cenBtn(code, lambda: exec(code))
                 self.cenLbl("Now you try to figure out a practical purpose for the input() method. Enter it in the comments (that I tooooootally read)")
-        
+                
         def if_statement(self):
                 self.new_lesson(7)
                 self.multiLbl("If statements determine *if* a condition (e.g. 1>2 is False and \"hello\" == \"hello\" is True) is True, then it does the stuff indented after the colon(:). One example is")
@@ -103,12 +112,18 @@ class Screens(Window):
                 if False:
                 \tprint("if False: \n\t\"is never evaluated\"")
                 """
-                self.cenBtn(btnText, lambda: self.run(code))
+                self.cenBtn(btnText, lambda: exec(code))
                 
         def else_elif(self):
                 self.new_lesson(8)
-                self.cenLbl(self.s[7].text)
                 self.multiLbl("\"But ... what if you want to test if something you just tested is not True? Do you need another if statement with (whatever condition) == False?\" I hear you commenting in the comment section. Well, the answer is NO STUPID!!! THIS IS PROGRAMMING!!! AND THIS LESSON EXISTS!!! LOOK AT THE TITLE!!! WHAT DID YOU THINK IT WOULD BE ABOUT??? The solution lies in else statements, which literally translate to ... you guessed it — else. You just type else: and then whatever the print(\"****\") you want if the condition you tested is false. \"But what if you want to have an if and else statement *inside* an else statement?\" The answer is THIS IS CODING YOU NOT SMART PERSON. And plus, it says it in the title. elif is short for else if which is short for else-erwise if this is true.")
         
-        def run(self, code):
-                exec(code)
+        def methods(self):
+                self.new_lesson(9)
+                self.multiLbl("Now, we're finally going to answer that question: \"WHAT THE HECK IS A METHOD?!?!?!?!?!?!?!?!?!\" Geez. Stop commenting. ITS BAD 4 UR PUNCSHOOASHUN CUPZ LOC KEE AN SPELEENG. IT WILL TURN THE SQL DATABASE THAT I DON'T READ INTO A YOUTUBE COMMENTS! I LITTERALLY MAKE THE WORDS UR COMMENT HAS BEEN RECIEVED APPEAR EVEN IF I NEVER READ IT!!! SHOOT MY CUZ LUC KEE IZ BROCEN I M USING A MAC ALL MY TEXT IS NOW AND FOREVER CAPITALIZED :(:(:(:(:(:(:(")
+                self.multiLbl("SO, ANYWAYS, A METHOD IS A FUNCTION INSIDE OF A CLASS. \"WHAT ARE FUNCTIONS AND CLASSES?\" YOU WILL FIND OUT NEXT LESSON.")
+        
+        def functions(self):
+                self.new_lesson(10)
+                self.multiLbl("A function. Use def function_name:\n\t#insert_code_here to create a function and function_name() to call it.")
+                
