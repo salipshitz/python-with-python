@@ -22,21 +22,23 @@ class ProjectScreen:
                 super(ProjectScreen, self).__init(title, showAs, func)
 
 class Screens(Window):
-        def new_lesson(self, screenNum):
+        def new_lesson(self, unit, screenNum):
                 screenNum -= 1
+		unitStr = "self.u"+str(unit)
+		u = exec(unitStr)
                 self.new()
-                self.cenLbl(self.s[screenNum].text)
+                self.cenLbl(u[screenNum].text)
                 if screenNum > 0:
-                        prevBtn(self.s[screenNum-1].func)
-                if nextScn < len(self.s)-1:
-                        nextBtn(self.s[screenNum+1].func)
+                        prevBtn(u[screenNum-1].func)
+                if screenNum < len(u)-1:
+                        nextBtn(u[screenNum+1].func)
         
         def __init__(self, master=None):
                 super(Screens, self).__init__(master)
                 self.master = master
                 self.master.title("LearnPythonWithPython")
                 self.pack(fill=BOTH, expand=1)
-                self.s = [
+                self.u1 = [
                         Screen(1, "Setting up the IDE", self.idle),
                         Screen(2, "Basic syntax", self.syn),
                         Screen(3, "Variables", self.var),
@@ -54,9 +56,8 @@ class Screens(Window):
 		
         def unit_1(self)
                 for i in range(len(self.screens)):
-                        s = self.s[i]
-                        ind = i+1
-                        self.cenBtn(s.text, s.screen_func)
+                        s = self.u1[i]
+                        self.cenBtn(s.title, s.func)
         
         def idle(self):
                 self.new_lesson(1)
@@ -77,40 +78,37 @@ class Screens(Window):
         def hello_world(self):
                 self.new_lesson(5)
                 self.multiLbl("Hello world programs are usually the first to be learned because they are so simple, but why do they make them so simple? Those programs could be made harder and more fun by just a little bit. First things first, you need to know what a hello world program looks like, so look in the console. Go on. I'm not going anywhere. You want to be able to do that? Well, that sucks for you. This lesson is not about hello world. It's about the base methods in Python. \"What's a method?\" I hear you typing in the comments. Well, I'm not telling you. And also I don't read the comments. So sucks for you.\nSo any ways, there are many base methods >:(don't even try asking):< such as print and input. Print prints text to the console. Input asks the user for input. That simple. Well not really. In print you have to put () after it because it's a *method* and inside those parentheses put what you want to say (HAS TO BE AN STR (can be a variable)), for example print(\"LearnPythonWithPython\") will print LearnPythonWithPython. Seriously. Try it. PRESS LE BUTTON!!!")
-                self.cenBtn("print(\"LearnPythonWithPython\")", self.hello_world_code)
+                code = """
+                print("LearnPythonWithPython")
+                """
+                self.cenBtn(code, lambda: self.run(code))
                 self.cenLbl("It's time for CHALLENGE TIME: Try to make a hello world program by declaring a variable called string and print()ing it")
         
         def inp(self):
                 self.new_lesson(6)
                 self.multiLbl("Hello, world! That last (mini) project was fun...ish. We want to make programs with UI! We want user input() ... i mean interface lol lmao rofl lellellellellelelelelelllelleleellelelelellelelel. so user \"interface\" as they call it is an interface where users interact. Hey! There's another possible name! User Interaction stuf! well anyways, let's get to the point. The input() method is a good starting point for UI. It allows the user to enter ... wait for it ... input()! Inside the parentheses thingies, you have to type in what ever you want the computer to ask you. For instance, press the button that has a line of code on it.")
-                self.cenBtn("inp = input(\"Enter your input here: \")\nprint(inp)", self.inp_code)
+                code = """
+                inp = input("Enter your input here: ")
+                print(inp)
+                """
+                self.cenBtn(code, self.run(code)
                 self.cenLbl("Now you try to figure out a practical purpose for the input() method. Enter it in the comments (that I tooooootally read)")
         
         def if_statement(self):
                 self.new_lesson(7)
                 self.multiLbl("If statements determine *if* a condition (e.g. 1>2 is False and \"hello\" == \"hello\" is True) is True, then it does the stuff indented after the colon(:). One example is")
-                btnTxt = """
+                code = """
                 if True:
                 \tprint("if True: \n\t\"is always evaluated\"")
                 if False:
                 \tprint("if False: \n\t\"is never evaluated\"")
                 """
-                self.cenBtn(btnText, self.if_code)
-        
+                self.cenBtn(btnText, lambda: self.run(code))
+                
         def else_elif(self):
                 self.new_lesson(8)
                 self.cenLbl(self.s[7].text)
                 self.multiLbl("\"But ... what if you want to test if something you just tested is not True? Do you need another if statement with (whatever condition) == False?\" I hear you commenting in the comment section. Well, the answer is NO STUPID!!! THIS IS PROGRAMMING!!! AND THIS LESSON EXISTS!!! LOOK AT THE TITLE!!! WHAT DID YOU THINK IT WOULD BE ABOUT??? The solution lies in else statements, which literally translate to ... you guessed it — else. You just type else: and then whatever the print(\"****\") you want if the condition you tested is false. \"But what if you want to have an if and else statement *inside* an else statement?\" The answer is THIS IS CODING YOU NOT SMART PERSON. And plus, it says it in the title. elif is short for else if which is short for else-erwise if this is true.")
-                
-        def hello_world_code(self):
-                print("LearnPythonWithPython")
         
-        def inp_code(self):
-                inp = input("Enter your input here: ")
-                print(inp)
-                
-        def if_code(self):
-                if True:
-                        print("if True: \n\t\"is always evaluated\"")
-                if False:
-                        print("if False: \n\t\"is never evaluated\"")
+        def run(self, code):
+                exec(code)
