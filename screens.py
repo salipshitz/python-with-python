@@ -2,16 +2,31 @@ from tkinter import *
 from window import Window
 
 class Screen:
-        def __init__(self, i, text, func):
-                self.text = "Lesson "+i+": "+text
-                self.screen_func = func
+        def __init__(self, title, showAs, func):
+                self.title = title
+                self.showAs = showAs
+                self.screenFunc = func
+
+class LessonScreen:
+        def __init__(self, i, text, screenFunc):
+                title = "Lesson "+str(i)+": "+text
+                showAs = title
+                func = screenFunc
+                super(LessonScreen, self).__init__(title, showAs, func)
+                
+class ProjectScreen:
+        def __init__(self, unit, proj, partTitle, screenFunc):
+                text = "Unit "+str(unit)+" - "+proj+": "+partTitle
+                showAs = partTitle
+                func = screenFunc
+                super(ProjectScreen, self).__init(title, showAs, func)
 
 class Screens(Window):
         def new_lesson(self, screenNum):
                 screenNum -= 1
                 self.new()
                 self.cenLbl(self.s[screenNum].text)
-                if screenNum > 1:
+                if screenNum > 0:
                         prevBtn(self.s[screenNum-1].func)
                 if nextScn < len(self.s)-1:
                         nextBtn(self.s[screenNum+1].func)
@@ -28,12 +43,16 @@ class Screens(Window):
                         Screen(4, "Data types", self.data_types),
                         Screen(5, "Hello, world!", self.hello_world),
                         Screen(6, "Input", self.inp),
-                        Screen(7, "If statements", self.if_statement)
+                        Screen(7, "If statements", self.if_statement),
                         Screen(8, "Else and elif statements", self.else_elif)
                 ]
 		
-        def s_init(self):
+        def s_init(self, unitNum):
                 self.new(home=True)
+		s = "self.unit_"+str(unitNum)+"()"
+                exec(s)
+		
+        def unit_1(self)
                 for i in range(len(self.screens)):
                         s = self.s[i]
                         ind = i+1
