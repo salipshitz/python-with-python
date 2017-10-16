@@ -38,9 +38,6 @@ class Screens(Window):
         def __init__(self, master=None):
                 self.homeBounds = "800x1000"
                 self.screenBounds = "800x400"
-                self.units = [
-
-                ]
                 self.u1 = [
                         LessonScreen(1, "Setting up the IDE", self.idle),
                         LessonScreen(2, "Basic syntax", self.syn),
@@ -51,7 +48,16 @@ class Screens(Window):
                         LessonScreen(7, "If statements", self.if_statement),
                         LessonScreen(8, "Else and elif statements", self.else_elif),
                         LessonScreen(9, "\"WHAT THE HECK IS A METHOD!?!?!?\" (your comments)", self.methods),
-                        LessonScreen(10, "A function. Ok? I will tell you what a function is.", self.functions)
+                        LessonScreen(10, "A function. Ok? I will tell you what a function is.", self.functions),
+                        LessonScreen(11, "I told you. Object oriented programming is functions. Well, sort of.", self.oop) 
+                ]
+                PROJ = "Battleship"
+                self.p1 = [
+                        ProjectScreen(1, PROJ, "What you're building", None),
+                        ProjectScreen(1, PROJ, "An empty list", None),
+                        ProjectScreen(1, PROJ, "Making the board", None),
+                        ProjectScreen(1, PROJ, "Printing the board", None),
+                        ProjectScreen(1, PROJ, "Hiding the ship", None)
                 ]
                 super(Screens, self).__init__(master)
                 self.master = master
@@ -59,17 +65,28 @@ class Screens(Window):
                 self.pack(fill=BOTH, expand=1)
                 
         def s_init(self, unitNum):
-                print("s_init")
+                self.new(0)
+                s = "self.unit_"+str(unitNum)+"()"
+                exec(s)
+                self.master.geometry(self.homeBounds)
+        
+        def p_init(self, unitNum):
                 self.new(0)
                 s = "self.unit_"+str(unitNum)+"()"
                 exec(s)
                 self.master.geometry(self.homeBounds)
                 
         def unit_1(self):
-                print("u1")
-                for i in range(len(self.u1)):
-                        s = self.u1[i]
+                for s in self.u1:
                         self.cenBtn(s.showAs, s.func)
+                self.cenBtn("Unit project: Battleship", lambda: self.p_init(1))
+                self.cenBtn("Unit 2: Turtle graphics", None) #s_init(2)
+        
+        def proj_1(self):
+                for s in self.p1:
+                        self.cenBtn(s.showAs, s.func)
+                self.cenBtn("Back to unit 1", lambda: self.s_init(1))
+                self.cenBtn("Unit 2: Turtle graphics", None) #s_init(2)
         
         def idle(self):
                 self.new_lesson(1, 1)
@@ -117,11 +134,39 @@ if False:\t\t\t\t\t
         
         def methods(self):
                 self.new_lesson(1, 9)
-                self.multiLbl("Now, we're finally going to answer that question: \"WHAT THE HECK IS A METHOD?!?!?!?!?!?!?!?!?!\" Geez. Stop commenting. ITS BAD 4 UR PUNCSHOOASHUN CUPZ LOC KEE AN SPELEENG. IT WILL TURN THE SQL DATABASE THAT I DON'T READ INTO A YOUTUBE COMMENTS! I LITTERALLY MAKE THE WORDS UR COMMENT HAS BEEN RECIEVED APPEAR EVEN IF I NEVER READ IT!!! SHOOT MY CUZ LUC KEE IZ BROCEN I M USING A MAC ALL MY TEXT IS NOW AND FOREVER CAPITALIZED :(:(:(:(:(:(:(")
+                self.multiLbl("Now, we're finally going to answer that question: \"WHAT THE HECK IS A METHOD?!?!?!?!?!?!?!?!?!\" Geez. Stop commenting. ITZ BAD 4 UR PUNCSHOOASHUN CUPZ LOC KEE AN SPILEENG. IT WILL TURN THE SQL DATABASE THAT I DON'T READ INTO A YOUTUBE COMMENTS! I LITTERALLY MAKE THE WORDS UR COMMENT HAS BEEN RECIEVED APPEAR EVEN IF I NEVER READ IT!!! SHOOT MY CUPZ LUC KEE IZ BROCEN I M USING A MAC ALL MY TEXT IS NOW AND FOREVER CAPITALIZED :(:(:(:(:(:(:(")
                 self.multiLbl("SO, ANYWAYS, A METHOD IS A FUNCTION INSIDE OF A CLASS. \"WHAT ARE FUNCTIONS AND CLASSES?\" YOU WILL FIND OUT NEXT LESSON.")
         
         def functions(self):
                 self.new_lesson(1, 10)
                 self.multiLbl("A function. Use:\n def function_name(args):\n\t#insert_code_here\n to create a function and function_name(args) to call it. You can have as many args as you want and they can be whatever you want. Be warned. Functions are eeeeevvvvveeeeerrrrryyyyywwwwwhhhhheeeeerrrrreeeee. Print is a function. Input is a function. If you look at the source code, you might see functions such as eval and exec. There are many other functions just 2 name a few.")
+        
+        def oop(self):
+                self.new_lesson(1, 11)
+                self.multiLbl("You thought this lesson was going to be about classes? Ha! weeeelllllll, technically object oriented programming is classes. You see, a class has the basic methods and variables. An object is one version of a class. Let me explain and show you the syntax for a class at the same time by making a student class. I'll show you how.")
+                code = """class Student:\t\t\t
+\tdef __init__(self, name, grade, gpa):\t
+\t\tself.name = name\t\t\t
+\t\tself.grade = grade\t\t\t
+\t\tself.gpa = gpa\t\t\t\t\t
+\tdef __repr__(self):\t\t\t
+\t\tprint(self.name+" has been in school for "+str(grade+1)+" years and his gpa is "+str(gpa)
+
+billy = Student(\"Billy Bob Joe\", 5, 3.95)
+print(billy)"""
+                self.cenBtn(code, lambda: exec(code))
+                self.cenLbl("Two underscores signify a special keyword, and in the case of a class, it's usually a method name. The __init__ method is run as soon as the object is initialized, and it takes in self and whatever other arguments you want it to. Self refers to the class. The __repr__ and __str__ methods are what happen when you want it to be a string, __repr__ is like the official one and __str__ is called when you use str(object_name). You also have __del__ and __call__ and many, many more. You can also create methods but the first argument is always self and to run it from another method in the class, you have to do self.method_name or you can run it like ObjectName.method_name. You can also have static methods which are called by ClassName.method_name(args) and don't have a self. To define a static method, you do @staticmethod above the line with the method.")
                 
+        def loops(self):
+                self.new_lesson(1, 12)
+                self.multiLbl("I'm doing this out of order but who cares. A loop is something that repeats. There are two types of loops. A for loop and a while loop. This should show you the difference")
+                code = """for item in ["Hello,", "World!", "foo", "bar"]:
+\tprint(item)"""
+                self.cenBtn(code, lambda: exec(code))
+                code = """i = 0
+while i < 4:
+\tprint(i)
+i += 1"""
+                self.cenBtn(code, lambda: exec(code))
+                self.multiLbl("So as you can see, a for loop loops for every item in a list and a while loop repeats while a condition is true. For for loops, a function that is commonly used is range(n). Range makes a list of numbers between 0 (inclusive) and n (exclusive). So range(3) returns [0, 1, 2] and range(1) returns [0]. If you're using for with a dictionary, for thing in dict will make thing the key but for key, value in dict will have key as the key and value as the value. Mind blown. A while loop will run while the condition is True.")
                 
