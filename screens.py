@@ -19,7 +19,7 @@ class ProjectScreen(Screen):
                 text = "Unit "+str(unit)+" - "+proj+": "+partTitle
                 showAs = partTitle
                 func = screenFunc
-                super(ProjectScreen, self).__init(title, showAs, func)
+                super().__init__(text, showAs, func)
 
 class Screens(Window):
         
@@ -49,7 +49,8 @@ class Screens(Window):
                         LessonScreen(8, "Else and elif statements", self.else_elif),
                         LessonScreen(9, "\"WHAT THE HECK IS A METHOD!?!?!?\" (your comments)", self.methods),
                         LessonScreen(10, "A function. Ok? I will tell you what a function is.", self.functions),
-                        LessonScreen(11, "I told you. Object oriented programming is functions. Well, sort of.", self.oop) 
+                        LessonScreen(11, "I told you. Object oriented programming is classes. Well, sort of.", self.oop),
+                        LessonScreen(12, "Loop-da-loops", self.loops)
                 ]
                 PROJ = "Battleship"
                 self.p1 = [
@@ -72,7 +73,8 @@ class Screens(Window):
         
         def p_init(self, unitNum):
                 self.new(0)
-                s = "self.unit_"+str(unitNum)+"()"
+                s = "self.proj_"+str(unitNum)+"()"
+                print(s)
                 exec(s)
                 self.master.geometry(self.homeBounds)
                 
@@ -98,7 +100,7 @@ class Screens(Window):
 
         def var(self):
                 self.new_lesson(1, 3)
-                self.multiLbl("Just like literally every single coding language in the world (except for maybe like BASIC and Assembly) and for sure every C based coding language (hint hint: Python is a C-based language), there are variables. There are many different types of variables in Python. Some examples are booleans (coming from Boolean algebra), lambdas (from lambda calculus) and numbers (from litterally every single form of math). Unlike 6th grade math, 7th grade math, 8th grade math, 9th grade math (Algebra I), 10th grade math (Geometry), 11th grade math (Algebra II), 12th grade math(Trigonometry?), college math(Calculus, Linear algebra, etc, etc, etc, and etc.), and some high school and college science(physics), variables in coding can have names longer than 1 letter with subscript. The only downside is that it takes up memory, and it takes up soooo mmuch storage. Like entire bytes. Soooooooo much!!!")
+                self.multiLbl("Just like literally every single coding language in the world (except for like binary) and for sure every C based coding language (hint hint: Python is a C-based language), there are variables. There are many different types of variables in Python. Some examples are booleans (coming from Boolean algebra), lambdas (from lambda calculus) and numbers (from litterally every single form of math). Unlike 6th grade math, 7th grade math, 8th grade math, 9th grade math (Algebra I), 10th grade math (Geometry), 11th grade math (Algebra II), 12th grade math(Trigonometry?), college math(Calculus, Linear algebra, etc, etc, etc, and etc.), and some high school and college science(physics), variables in coding can have names longer than 1 letter with subscript. The only downside is that it takes up memory, and it takes up soooo mmuch storage. Like entire bytes. Soooooooo much!!!")
 
         def data_types(self):
                 self.new_lesson(1, 4)
@@ -144,29 +146,33 @@ if False:\t\t\t\t\t
         def oop(self):
                 self.new_lesson(1, 11)
                 self.multiLbl("You thought this lesson was going to be about classes? Ha! weeeelllllll, technically object oriented programming is classes. You see, a class has the basic methods and variables. An object is one version of a class. Let me explain and show you the syntax for a class at the same time by making a student class. I'll show you how.")
-                code = """class Student:\t\t\t
-\tdef __init__(self, name, grade, gpa):\t
-\t\tself.name = name\t\t\t
-\t\tself.grade = grade\t\t\t
-\t\tself.gpa = gpa\t\t\t\t\t
-\tdef __repr__(self):\t\t\t
+                code = """class Student:\t\t\t\t\t
+\tdef __init__(self, name, grade, gpa):\t\t\t
+\t\tself.name = name\t\t\t\t\t\t
+\t\tself.grade = grade\t\t\t\t\t\t
+\t\tself.gpa = gpa\t\t\t\t\t\t\t\t
+\tdef __repr__(self):\t\t\t\t\t\t
 \t\tprint(self.name+" has been in school for "+str(grade+1)+" years and his gpa is "+str(gpa)
 
-billy = Student(\"Billy Bob Joe\", 5, 3.95)
-print(billy)"""
+billy = Student(\"Billy Bob Joe\", 5, 3.95)\t\t\t\t
+print(billy)\t\t\t\t\t"""
                 self.cenBtn(code, lambda: exec(code))
                 self.cenLbl("Two underscores signify a special keyword, and in the case of a class, it's usually a method name. The __init__ method is run as soon as the object is initialized, and it takes in self and whatever other arguments you want it to. Self refers to the class. The __repr__ and __str__ methods are what happen when you want it to be a string, __repr__ is like the official one and __str__ is called when you use str(object_name). You also have __del__ and __call__ and many, many more. You can also create methods but the first argument is always self and to run it from another method in the class, you have to do self.method_name or you can run it like ObjectName.method_name. You can also have static methods which are called by ClassName.method_name(args) and don't have a self. To define a static method, you do @staticmethod above the line with the method.")
-                
+
+        def code(self, code):
+                exec(code)
         def loops(self):
                 self.new_lesson(1, 12)
                 self.multiLbl("I'm doing this out of order but who cares. A loop is something that repeats. There are two types of loops. A for loop and a while loop. This should show you the difference")
-                code = """for item in ["Hello,", "World!", "foo", "bar"]:
-\tprint(item)"""
-                self.cenBtn(code, lambda: exec(code))
+                code = """for i in range(3):
+        print(i)
+"""
+                btn = Button(self.master, text=code)
+                btn.pack(anchor=CENTER)
+                btn.bind('<Button-1>', lambda e: exec(code))
                 code = """i = 0
 while i < 4:
 \tprint(i)
 i += 1"""
                 self.cenBtn(code, lambda: exec(code))
                 self.multiLbl("So as you can see, a for loop loops for every item in a list and a while loop repeats while a condition is true. For for loops, a function that is commonly used is range(n). Range makes a list of numbers between 0 (inclusive) and n (exclusive). So range(3) returns [0, 1, 2] and range(1) returns [0]. If you're using for with a dictionary, for thing in dict will make thing the key but for key, value in dict will have key as the key and value as the value. Mind blown. A while loop will run while the condition is True.")
-                
