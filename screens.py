@@ -58,7 +58,13 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "An empty list", None),
                         ProjectScreen(1, PROJ, "Making the board", None),
                         ProjectScreen(1, PROJ, "Printing the board", None),
-                        ProjectScreen(1, PROJ, "Hiding the ship", None)
+                        ProjectScreen(1, PROJ, "Hide", None),
+                        ProjectScreen(1, PROJ, "and go seek!", None),
+                        ProjectScreen(1, PROJ, "#CHEAT-OS!!!", None),
+                        ProjectScreen(1, PROJ, "We have a winner!!!", None),
+                        ProjectScreen(1, PROJ, "YOU SAX!!!", None),
+                        ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
+                        ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None)
                 ]
                 super(Screens, self).__init__(master)
                 self.master = master
