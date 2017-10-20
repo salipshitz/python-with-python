@@ -152,27 +152,34 @@ if False:\t\t\t\t\t
 \t\tself.grade = grade\t\t\t\t\t\t
 \t\tself.gpa = gpa\t\t\t\t\t\t\t\t
 \tdef __repr__(self):\t\t\t\t\t\t
-\t\tprint(self.name+" has been in school for "+str(grade+1)+" years and his gpa is "+str(gpa)
+\t\treturn self.name+" has been in school for "+str(self.grade+1)+" years and has a gpa of "+str(self.gpa)
 
 billy = Student(\"Billy Bob Joe\", 5, 3.95)\t\t\t\t
 print(billy)\t\t\t\t\t"""
                 self.cenBtn(code, lambda: exec(code))
-                self.cenLbl("Two underscores signify a special keyword, and in the case of a class, it's usually a method name. The __init__ method is run as soon as the object is initialized, and it takes in self and whatever other arguments you want it to. Self refers to the class. The __repr__ and __str__ methods are what happen when you want it to be a string, __repr__ is like the official one and __str__ is called when you use str(object_name). You also have __del__ and __call__ and many, many more. You can also create methods but the first argument is always self and to run it from another method in the class, you have to do self.method_name or you can run it like ObjectName.method_name. You can also have static methods which are called by ClassName.method_name(args) and don't have a self. To define a static method, you do @staticmethod above the line with the method.")
+                self.multiLbl("Two underscores signify a special keyword, and in the case of a class, it's usually a method name. The __init__ method is run as soon as the object is initialized, and it takes in self and whatever other arguments you want it to. Self refers to the class. The __repr__ and __str__ methods are what happen when you want it to be a string, __repr__ is like the official one and __str__ is called when you use str(object_name). You also have __del__ and __call__ and many, many more. You can also create methods but the first argument is always self and to run it from another method in the class, you have to do self.method_name or you can run it like ObjectName.method_name. You can also have static methods which are called by ClassName.method_name(args) and don't have a self. To define a static method, you do @staticmethod above the line with the method.")
 
-        def code(self, code):
-                exec(code)
+        def loop_1_12_1(self, i):
+                if i < 3:
+                        print(i)
+                        self.master.after_idle(self.loop_1_12_1, i+1)
+
+        def loop_1_12_2(self, i):
+                if i < 4:
+                        print(i)
+                        i += 1
+                        self.master.after_idle(self.loop_1_12_2, i)
+
         def loops(self):
                 self.new_lesson(1, 12)
                 self.multiLbl("I'm doing this out of order but who cares. A loop is something that repeats. There are two types of loops. A for loop and a while loop. This should show you the difference")
                 code = """for i in range(3):
         print(i)
 """
-                btn = Button(self.master, text=code)
-                btn.pack(anchor=CENTER)
-                btn.bind('<Button-1>', lambda e: exec(code))
+                self.cenBtn(code, lambda: self.loop_1_12_1(0))
                 code = """i = 0
 while i < 4:
 \tprint(i)
-i += 1"""
-                self.cenBtn(code, lambda: exec(code))
+\ti += 1"""
+                self.cenBtn(code, lambda: self.loop_1_12_2(0))
                 self.multiLbl("So as you can see, a for loop loops for every item in a list and a while loop repeats while a condition is true. For for loops, a function that is commonly used is range(n). Range makes a list of numbers between 0 (inclusive) and n (exclusive). So range(3) returns [0, 1, 2] and range(1) returns [0]. If you're using for with a dictionary, for thing in dict will make thing the key but for key, value in dict will have key as the key and value as the value. Mind blown. A while loop will run while the condition is True.")
