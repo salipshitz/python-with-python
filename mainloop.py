@@ -7,3 +7,5 @@ master = Tk()
 master.geometry("500x250")
 app = Screens(master=master)
 master.mainloop()
+
+input("Press enter to quit")

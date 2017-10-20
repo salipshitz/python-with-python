@@ -38,14 +38,14 @@ class Screens(Window):
         #partNum: 0 is what your building, then 1, 2, 3, 4, 5
         def new_proj(self, unit, partNum):
                 self.master.geometry(self.screenBounds)
-                projStr = "self.p"+unit
+                projStr = "self.p"+str(unit)
                 p = eval(projStr)
                 self.new(unit)
                 self.cenLbl(p[partNum].title)
                 if partNum > 0:
-                        self.btnPrev(p[screenNum-1].func)
+                        self.btnPrev(p[partNum-1].func)
                 if partNum < len(p)-1:
-                        self.btnPrev(p[screenNum+1].func)
+                        self.btnNext(p[partNum+1].func)
         
         def __init__(self, master=None):
                 self.homeBounds = "800x1000"
@@ -208,19 +208,19 @@ while i < 4:
                 self.multiLbl("So as you can see, a for loop loops for every item in a list and a while loop repeats while a condition is true. For for loops, a function that is commonly used is range(n). Range makes a list of numbers between 0 (inclusive) and n (exclusive). So range(3) returns [0, 1, 2] and range(1) returns [0]. If you're using for with a dictionary, for thing in dict will make thing the key but for key, value in dict will have key as the key and value as the value. Mind blown. A while loop will run while the condition is True.")
 
                 
-                def bs_intro(self):
-                        self.new_proj(1, 0)
-                        self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the row and column correctly.")
-                
-                def bs_empty_list(self):
-                        self.new_proj(1, 1)
-                        self.multiLbl("This lesson is pretty self explanatory. Make an empty list called the board. board=[].")
-                
-                def bs_board_list(self):
-                        self.new_proj(1, 2)
-                        self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nrows = 5\ncols = 5\n board=[["O"]*5]*5 and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
-                        
-                def bs_print_board(self):
-                        self.new_proj(1, 3)
-                        self.multilbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take one argument, board and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. That is our command in the for loop.""")
-                        
+        def bs_intro(self):
+                self.new_proj(1, 0)
+                self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the row and column correctly.")
+
+        def bs_empty_list(self):
+                self.new_proj(1, 1)
+                self.multiLbl("This lesson is pretty self explanatory. Make an empty list called the board. board=[].")
+
+        def bs_board_list(self):
+                self.new_proj(1, 2)
+                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nrows = 5\ncols = 5\n board=[["O"]*5]*5 and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
+            
+        def bs_print_board(self):
+                self.new_proj(1, 3)
+                self.multiLbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take one argument, board and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. That is our command in the for loop.""")
+					
