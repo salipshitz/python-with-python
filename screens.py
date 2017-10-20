@@ -22,18 +22,30 @@ class ProjectScreen(Screen):
                 super().__init__(text, showAs, func)
 
 class Screens(Window):
-        
+        #screenNum: 1, 2, 3, 4, 5, etc.
         def new_lesson(self, unit, screenNum):
                 screenNum -= 1
                 self.master.geometry(self.screenBounds)
                 unitStr = "self.u"+str(unit)
                 u = eval(unitStr)
-                self.new(1)
+                self.new(unit)
                 self.cenLbl(u[screenNum].title)
                 if screenNum > 0:
                         self.btnPrev(u[screenNum-1].func)
                 if screenNum < len(u)-1:
                         self.btnNext(u[screenNum+1].func)
+        
+        #partNum: 0 is what your building, then 1, 2, 3, 4, 5
+        def new_proj(self, unit, partNum):
+                self.master.geometry(self.screenBounds)
+                projStr = "self.p"+unit
+                p = eval(projStr)
+                self.new(unit)
+                self.cenLbl(p[partNum].title)
+                if partNum > 0:
+                        self.btnPrev(p[screenNum-1].func)
+                if partNum < len(p)-1:
+                        self.btnPrev(p[screenNum+1].func)
         
         def __init__(self, master=None):
                 self.homeBounds = "800x1000"
@@ -64,7 +76,12 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "We have a winner!!!", None),
                         ProjectScreen(1, PROJ, "YOU SAX!!!", None),
                         ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
-                        ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None)
+                        ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None),
+                        ProjectScreen(1, PROJ, "Testing, one, two, three", None),
+                        ProjectScreen(1, PROJ, "Loop. Loop-edy loop loop la-loop loop", None),
+                        ProjectScreen(1, PROJ, "Are you sure you won?", None),
+                        ProjectScreen(1, PROJ, "Stop cheating!", None),
+                        ProjectScreen(1, PROJ, "Extra credit!", None)
                 ]
                 super(Screens, self).__init__(master)
                 self.master = master
@@ -88,7 +105,7 @@ class Screens(Window):
                 for s in self.u1:
                         self.cenBtn(s.showAs, s.func)
                 self.cenBtn("Unit project: Battleship", lambda: self.p_init(1))
-                self.cenBtn("Unit 2: Turtle graphics", None) #s_init(2)
+                Button(self, text="Unit 2: Turtle graphics", command=None).place(relx=1.0, rely=1.0, anchor=SE)
         
         def proj_1(self):
                 for s in self.p1:
@@ -189,3 +206,8 @@ while i < 4:
 \ti += 1"""
                 self.cenBtn(code, lambda: self.loop_1_12_2(0))
                 self.multiLbl("So as you can see, a for loop loops for every item in a list and a while loop repeats while a condition is true. For for loops, a function that is commonly used is range(n). Range makes a list of numbers between 0 (inclusive) and n (exclusive). So range(3) returns [0, 1, 2] and range(1) returns [0]. If you're using for with a dictionary, for thing in dict will make thing the key but for key, value in dict will have key as the key and value as the value. Mind blown. A while loop will run while the condition is True.")
+
+                
+                def bs_building(self):
+                        self.new_proj(1, 0)
+                        self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the row and column correctly.")
