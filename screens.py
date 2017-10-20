@@ -74,7 +74,7 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "and go seek!", None),
                         ProjectScreen(1, PROJ, "#CHEAT-OS!!!", None),
                         ProjectScreen(1, PROJ, "We have a winner!!!", None),
-                        ProjectScreen(1, PROJ, "YOU SAX!!!", self.bs_lose),
+                        ProjectScreen(1, PROJ, "YOU SAX!!!", None),
                         ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
                         ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None),
                         ProjectScreen(1, PROJ, "Testing, one, two, three", None),
