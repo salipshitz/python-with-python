@@ -70,10 +70,10 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "An empty list", self.bs_empty_list),
                         ProjectScreen(1, PROJ, "Making the board", self.bs_board_list),
                         ProjectScreen(1, PROJ, "Printing the board", self.bs_print_board),
-                        ProjectScreen(1, PROJ, "Hide", None),
-                        ProjectScreen(1, PROJ, "and go seek!", None),
-                        ProjectScreen(1, PROJ, "#CHEAT-OS!!!", None),
-                        ProjectScreen(1, PROJ, "We have a winner!!!", None),
+                        ProjectScreen(1, PROJ, "Hide", self.bs_hide),
+                        ProjectScreen(1, PROJ, "and go seek!", self.bs_seek),
+                        ProjectScreen(1, PROJ, "#CHEAT-OS!!!", self.bs_debug),
+                        ProjectScreen(1, PROJ, "We have a winner!!!", self.bs_win),
                         ProjectScreen(1, PROJ, "YOU SAX!!!", None),
                         ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
                         ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None),
@@ -97,7 +97,6 @@ class Screens(Window):
         def p_init(self, unitNum):
                 self.new(0)
                 s = "self.proj_"+str(unitNum)+"()"
-                print(s)
                 exec(s)
                 self.master.geometry(self.homeBounds)
                 
@@ -218,9 +217,24 @@ while i < 4:
 
         def bs_board_list(self):
                 self.new_proj(1, 2)
-                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nrows = 5\ncols = 5\n board=[["O"]*5]*5 and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
+                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nwidth = 5\nheight = 5\n board=[["O"]*height]*width and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
             
         def bs_print_board(self):
                 self.new_proj(1, 3)
                 self.multiLbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take one argument, board and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. That is our command in the for loop.""")
-					
+                
+        def bs_hide(self):
+                self.new_proj(1, 4)
+                self.multiLbl("""Let's "hide" the ship. To do this, we need to have a few lines of code. First we need to do this thing called import-ing. To import, you can either do import module_name or from module_name import what_you_want_from_the_module (or you can add as what_you_want_to_called). So we need to do a from module_name import what_you_want. We want to import randint from random. Soooo, just use your logic and from random import randint. Then you need to set a variable *col =* to a *randint* from *(0* to *height-1)* and set *row =* to a *randint* from *(0* to *width-1)*. Then you have the locations of the ship""")
+
+        def bs_seek(self):
+                self.new_proj(1, 5)
+                self.multiLbl("""Let's "seek" the ship. To do this, we need to ask the user for *input()*. Let's set a variable called *row_guess =* to *input("Guess row: ") and set *col_guess =* to *input("Guess column")*. Then we have a guess that literally does nothing (so far).""")
+
+        def bs_debug(self):
+                self.new_proj(1, 6)
+                self.multiLbl("""It's not cheating. It's debugging. You should really *print* the *row* and *col*.""")
+
+        def bs_win(self):
+                self.new_proj(1, 7)
+                self.multiLbl("""To make a winning condition you need to test *if guess_row == row and guess_col == col:* and inside the *if* you should *print("something like \\"We have a winner\\"")*.\n\n\nP.S. \\ means escape a character, e.g. \\n means new line, \\\\ means a backslash, \\t means a tab, etc.""")
