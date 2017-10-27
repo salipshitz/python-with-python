@@ -70,7 +70,7 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "An empty list", self.bs_empty_list),
                         ProjectScreen(1, PROJ, "Making the board", self.bs_board_list),
                         ProjectScreen(1, PROJ, "Printing the board", self.bs_print_board),
-                        ProjectScreen(1, PROJ, "Hide", None),
+                        ProjectScreen(1, PROJ, "Hide", self.bs_hide),
                         ProjectScreen(1, PROJ, "and go seek!", None),
                         ProjectScreen(1, PROJ, "#CHEAT-OS!!!", None),
                         ProjectScreen(1, PROJ, "We have a winner!!!", None),
@@ -210,7 +210,7 @@ while i < 4:
                 
         def bs_intro(self):
                 self.new_proj(1, 0)
-                self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the row and column correctly.")
+                self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the coordinates correctly.")
 
         def bs_empty_list(self):
                 self.new_proj(1, 1)
@@ -218,9 +218,13 @@ while i < 4:
 
         def bs_board_list(self):
                 self.new_proj(1, 2)
-                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nrows = 5\ncols = 5\n board=[["O"]*5]*5 and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
+                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nboard=[["O"]*5]*5 (where the first 5 is the width and the second 5 is the height) and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
             
         def bs_print_board(self):
                 self.new_proj(1, 3)
                 self.multiLbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take one argument, board and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. That is our command in the for loop.""")
-					
+                
+        def bs_hide(self):
+                self.new_proj(1, 3)
+                self.multiLbl("""Let's hide the ship. To do that we need to do this thing called import-ing. You have a few ways to import. One way is import module_name where module_name is the name of the module you're import-ing. Another thing is that in a future lesson, you will learn how to change the width and height (hint hint you already know how) so we need a more flexible way of doing this. First we need \nship_row = randint(0, len(board)-1)\nship_col = randint(0, len(board[0])-1)""")
+                
