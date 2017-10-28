@@ -209,7 +209,7 @@ while i < 4:
                 
         def bs_intro(self):
                 self.new_proj(1, 0)
-                self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the row and column correctly.")
+                self.multiLbl("You are going to be building a game that's sort of like this game called battleship. So the computer hides a ship and you have to shoot it down by guessing the coordinates correctly.")
 
         def bs_empty_list(self):
                 self.new_proj(1, 1)
