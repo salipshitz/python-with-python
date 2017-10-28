@@ -18,4 +18,4 @@ while not q:
         elif inp == 'n':
             done = True
             continue
-        inp = input("Seriously. Type y or n")
+        inp = input("Seriously. (y/n)")

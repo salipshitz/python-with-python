@@ -217,7 +217,7 @@ while i < 4:
 
         def bs_board_list(self):
                 self.new_proj(1, 2)
-                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nwidth = 5\nheight = 5\n board=[["O"]*height]*width and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
+                self.multiLbl("""Now we need to make the list store where the ship is and where you fired and stuff so let's get right to the Chase. Or Wells Fargo. Or whatever bank you use. So, there's this thing I haven't told you. Actually two things. Number 1: If there's a list inside a list, it's called a 2-dimensional list or a 2D list. A list in a list in a list is a 3D list. Etc, etc, etc. The other thing is that you can create lists with multiple copies of the same value by wrapping it in square brackets (as in to create a list of one item) and multiplying it by a certain amount. Let me give you an example. Let's say you wanted a list with 3 "O"s stored in cheerios. You could initialize it like this: cheerios = ["O", "O", "O"] or you could initialize it like this: cheerios = ["O"]*3 and still get the same result. We'll use this when making our board. Instead of doing a manual 2D array and stuff, we're going to do it like this:\nboard = [["O"]*5 for i in range(5)] and you will get [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]""")
             
         def bs_print_board(self):
                 self.new_proj(1, 3)
@@ -225,7 +225,7 @@ while i < 4:
                 
         def bs_hide(self):
                 self.new_proj(1, 4)
-                self.multiLbl("""Let's "hide" the ship. To do this, we need to have a few lines of code. First we need to do this thing called import-ing. To import, you can either do import module_name or from module_name import what_you_want_from_the_module (or you can add as what_you_want_to_called). So we need to do a from module_name import what_you_want. We want to import randint from random. Soooo, just use your logic and from random import randint. Then you need to set a variable *col =* to a *randint* from *(0* to *height-1)* and set *row =* to a *randint* from *(0* to *width-1)*. Then you have the locations of the ship""")
+                self.multiLbl("""Let's "hide" the ship. To do this, we need to have a few lines of code. First we need to do this thing called import-ing. To import, you can either do import module_name or from module_name import what_you_want_from_the_module (or you can add as what_you_want_to_called). So we need to do a from module_name import what_you_want. We want to import randint from random. Soooo, just use your logic and from random import randint. Then you need to set a variable *col =* to a *randint* from *(0,* to *len(boardp[0])-1)* and set *row =* to a *randint* from *(0,* to *len(board)-1)*. Then you have the locations of the ship""")
 
         def bs_seek(self):
                 self.new_proj(1, 5)
@@ -237,4 +237,8 @@ while i < 4:
 
         def bs_win(self):
                 self.new_proj(1, 7)
-                self.multiLbl("""To make a winning condition you need to test *if guess_row == row and guess_col == col:* and inside the *if* you should *print("something like \\"We have a winner\\"")*.\n\n\nP.S. \\ means escape a character, e.g. \\n means new line, \\\\ means a backslash, \\t means a tab, etc.""")
+                self.multiLbl("""To make a winning condition you need to test *if guess_row == row and guess_col == col:* and inside the *if* you should *print("something like \\"We have a winner\\"")*.\n\n\nP.S. You can""")
+
+        def bs_lose(self):
+                self.new_proj(1, 8)
+                self.multiLbl("""To make a losing condition, we have to add an else. The else co""")
