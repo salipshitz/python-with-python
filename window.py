@@ -7,7 +7,6 @@ class Window(Frame):
         
         def close_app(self):
                 self.master.destroy()
-                print("Succesfully killed")
                 
         def cenBtn(self, txt, func):
                b = Button(self, text=txt, command=func)

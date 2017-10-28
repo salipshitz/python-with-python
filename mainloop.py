@@ -3,9 +3,19 @@
 from tkinter import Tk
 from screens import Screens
 
-master = Tk()
-master.geometry("500x250")
-app = Screens(master=master)
-master.mainloop()
-
-input("Press enter to quit")
+q = False
+while not q:
+    master = Tk()
+    app = Screens(master=master)
+    master.mainloop()
+    done = False
+    inp = input("Are you sure you want to quit (y/n)")
+    while not done:
+        if inp == 'y':
+            done = True
+            q = True
+            break
+        elif inp == 'n':
+            done = True
+            continue
+        inp = input("Seriously. (y/n)")
