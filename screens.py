@@ -2,10 +2,17 @@ from tkinter import *
 from window import Window
 
 class Screen:
+        width = 300
         def __init__(self, title, showAs, func):
                 self.title = title
                 self.showAs = showAs
                 self.func = func
+        
+        def __repr__(self):
+                return showAs
+        
+        def __str__(self):
+                return self.__repr__()
 
 class LessonScreen(Screen):
         def __init__(self, i, text, screenFunc):
@@ -22,6 +29,10 @@ class ProjectScreen(Screen):
                 super().__init__(text, showAs, func)
 
 class Screens(Window):
+        def scrnBtn(self, btn):
+                btn = self.cenBtn(btn, btn.func)
+                btn.cofig(width=btn.width)
+        
         #screenNum: 1, 2, 3, 4, 5, etc.
         def new_lesson(self, unit, screenNum):
                 screenNum -= 1
@@ -78,11 +89,17 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
                         ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None),
                         ProjectScreen(1, PROJ, "Testing, one, two, three", None),
-                        ProjectScreen(1, PROJ, "Loop. Loop-edy loop loop la-loop loop", None),
                         ProjectScreen(1, PROJ, "Are you sure you won?", None),
                         ProjectScreen(1, PROJ, "Stop cheating!", None),
-                        ProjectScreen(1, PROJ, "Extra credit!", None)
+                        ProjectScreen(1, PROJ, "Adding enemy board", None)
                 ]
+                self.units = [
+                        {name: "The fundmentals of Python programming", started: True},
+                        {name: "Turtle graphics", started: False},
+                        {name: "GUI with Tkinter", started: False},
+                        {name: "
+                ]
+                self.pr1 = PROJ
                 super().__init__(master)
                 self.master = master
                 self.master.title("LearnPythonWithPython")
@@ -99,10 +116,17 @@ class Screens(Window):
                 s = "self.proj_"+str(unitNum)+"()"
                 exec(s)
                 self.master.geometry(self.homeBounds)
+        
+        def unit_scrn(self, i):
+                for s in eval("self.u"+str(i)):
+                        self.scrnBtn(s)
+                self.cenBtn("Unit project: "+eval("pr"+i), eval("p"+i))
+                if self.units[i].started:
+                        Button(self, text="Unit"+str(i+1)+self.units[i].text, command=eval("self.units["+str(i+1)+"]"
                 
         def unit_1(self):
                 for s in self.u1:
-                        self.cenBtn(s.showAs, s.func)
+                        self.scrnBtn(s)
                 self.cenBtn("Unit project: Battleship", lambda: self.p_init(1))
                 Button(self, text="Unit 2: Turtle graphics", command=None).place(relx=1.0, rely=1.0, anchor=SE)
         
@@ -241,4 +265,4 @@ while i < 4:
 
         def bs_lose(self):
                 self.new_proj(1, 8)
-                self.multiLbl("""To make a losing condition, we have to add an else. The else co""")
+                self.multiLbl("""To make a losing condition, we have to add an else. The else condition will be if he gets it wrong.""")
