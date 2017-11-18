@@ -9,7 +9,7 @@ class Screen:
                 self.func = func
         
         def __repr__(self):
-                return showAs
+                return self.showAs
         
         def __str__(self):
                 return self.__repr__()
@@ -29,9 +29,14 @@ class ProjectScreen(Screen):
                 super().__init__(text, showAs, func)
 
 class Screens(Window):
-        def scrnBtn(self, btn):
-                btn = self.cenBtn(btn, btn.func)
-                btn.cofig(width=btn.width)
+        def scrnBtn(self, screenbtn):
+                text = screenbtn.title
+                func = screenbtn.func
+                self.projBtn(text, func)
+
+        def projBtn(self, text, func):
+                btn = self.cenBtn(text, func)
+                btn.config(width=self.scrnWidth)
         
         #screenNum: 1, 2, 3, 4, 5, etc.
         def new_lesson(self, unit, screenNum):
@@ -61,6 +66,7 @@ class Screens(Window):
         def __init__(self, master=None):
                 self.homeBounds = "800x1000"
                 self.screenBounds = "800x400"
+                self.scrnWidth = 100
                 self.u1 = [
                         LessonScreen(1, "Setting up the IDE", self.idle),
                         LessonScreen(2, "Basic syntax", self.syn),
@@ -94,10 +100,9 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "Adding enemy board", None)
                 ]
                 self.units = [
-                        {name: "The fundmentals of Python programming", started: True},
-                        {name: "Turtle graphics", started: False},
-                        {name: "GUI with Tkinter", started: False},
-                        {name: "
+                        {"name": "The fundmentals of Python programming", "started": True},
+                        {"name": "Turtle graphics", "started": False},
+                        {"name": "GUI with Tkinter", "started": False}
                 ]
                 self.pr1 = PROJ
                 super().__init__(master)
@@ -107,8 +112,7 @@ class Screens(Window):
                 
         def s_init(self, unitNum):
                 self.new(0)
-                s = "self.unit_"+str(unitNum)+"()"
-                exec(s)
+                self.unit_scrn(unitNum)
                 self.master.geometry(self.homeBounds)
         
         def p_init(self, unitNum):
@@ -119,16 +123,10 @@ class Screens(Window):
         
         def unit_scrn(self, i):
                 for s in eval("self.u"+str(i)):
-                        self.scrnBtn(s)
-                self.cenBtn("Unit project: "+eval("pr"+i), eval("p"+i))
-                if self.units[i].started:
-                        Button(self, text="Unit"+str(i+1)+self.units[i].text, command=eval("self.units["+str(i+1)+"]"
-                
-        def unit_1(self):
-                for s in self.u1:
-                        self.scrnBtn(s)
-                self.cenBtn("Unit project: Battleship", lambda: self.p_init(1))
-                Button(self, text="Unit 2: Turtle graphics", command=None).place(relx=1.0, rely=1.0, anchor=SE)
+                    self.scrnBtn(s)
+                self.projBtn("Unit project: "+eval("self.pr"+str(i)), self.p_init(i))
+                if self.units[i]["started"]:
+                        Button(self, text="Unit"+str(i+1)+self.units[i].text, command=eval("self.u"+str(i+1))).place(relx=1.0, rely=1.0, anchor=SE)
         
         def proj_1(self):
                 for s in self.p1:

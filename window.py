@@ -9,13 +9,11 @@ class Window(Frame):
                 self.master.destroy()
                 
         def cenBtn(self, txt, func):
-               b = Button(self, text=txt, command=func)
-               b.pack()
-                
+               btn = Button(self, text=txt, command=func)
+               btn.pack()
+               return btn
         def choBtn(self, txt, func, x, y):
-                b = Button(self, text=txt, command=func)
-                b.place(x=x, y=y)
-                return b
+                return Button(self, text=txt, command=func).place(x=x, y=y)
                 
         def btnQuit(self):
                 return self.choBtn("Quit", self.close_app, 0, 0)
@@ -24,10 +22,14 @@ class Window(Frame):
                 return self.choBtn("Back", lambda: self.s_init(unit), 0, 0)
 
         def btnNext(self, nextScreen):
-                return Button(self, text="Next", command=nextScreen).place(relx=1.0, rely=1.0, anchor=SE)
+                btn = Button(self, text="Next", command=nextScreen)
+                btn.place(relx=1.0, rely=1.0, anchor=SE)
+                return btn
 
         def btnPrev(self, prevScreen):
-                return Button(self, text="Previous", command=prevScreen).place(relx=0.0, rely=1.0, anchor=SW)
+                btn = Button(self, text="Previous", command=prevScreen)
+                btn.place(relx=0.0, rely=1.0, anchor=SW)
+                return btn
                 
         def choLbl(self, txt, x, y):
                 lbl = Label(self, text=txt)
@@ -35,10 +37,14 @@ class Window(Frame):
                 return lbl
         
         def cenLbl(self, txt):
-                return Label(self, text=txt).pack()
-
+                lbl = Label(self, text=txt)
+                lbl.pack()
+                return lbl
+        
         def multiLbl(self, txt):
-                return Label(self, text=txt, wraplength=750).pack(anchor=W)
+                lbl = Label(self, text=txt, wraplength=750)
+                lbl.pack(anchor=W)
+                return lbl
                 
         def new(self, unit):
                 for widget in self.winfo_children():
