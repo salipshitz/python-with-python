@@ -1,1 +1,1 @@
-board = [["O"]*5 for i in range 5]
+board = [["O"]*5 for _ in range 5]
