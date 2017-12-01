@@ -10,3 +10,5 @@ row = randint(0, len(board))
 
 row_guess = input("Guess row: ")
 col_guess = input("Guess column: ")
+
+print(row, col)
