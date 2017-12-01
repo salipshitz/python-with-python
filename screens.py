@@ -94,10 +94,14 @@ class Screens(Window):
                         ProjectScreen(1, PROJ, "YOU SAX!!!", None),
                         ProjectScreen(1, PROJ, "Next time, try to aim *inside* the ocean", None),
                         ProjectScreen(1, PROJ, "\"Insanity: doing the same thing over and over and expecting different results\" - Albert Einstein", None),
+                        ProjectScreen(1, PROJ, "Game loop-da-loops", None),
                         ProjectScreen(1, PROJ, "Testing, one, two, three", None),
                         ProjectScreen(1, PROJ, "Are you sure you won?", None),
                         ProjectScreen(1, PROJ, "Stop cheating!", None),
-                        ProjectScreen(1, PROJ, "Adding enemy board", None)
+                        ProjectScreen(1, PROJ, "Adding the other board", None),
+                        ProjectScreen(1, PROJ, "Now, hide your ships", None),
+                        ProjectScreen(1, PROJ, "Pirates of the Caribbean", None),
+                        ProjectScreen(1, PROJ, "You are terminated!", None)
                 ]
                 self.units = [
                         {"name": "The fundmentals of Python programming", "started": True},
@@ -112,7 +116,11 @@ class Screens(Window):
                 
         def s_init(self, unitNum):
                 self.new(0)
-                self.unit_scrn(unitNum)
+                for s in eval("self.u"+str(unitNum)):
+                    self.scrnBtn(s)
+                self.projBtn("Unit project: "+eval("self.pr"+str(unitNum)), self.p_init(unitNum))
+                if self.units[unitNum]["started"]:
+                        Button(self, text="Unit"+str(unitNum+1)+self.units[unitNum].text, command=eval("self.u"+str(unitNum+1))).place(relx=1.0, rely=1.0, anchor=SE)
                 self.master.geometry(self.homeBounds)
         
         def p_init(self, unitNum):
@@ -121,18 +129,11 @@ class Screens(Window):
                 exec(s)
                 self.master.geometry(self.homeBounds)
         
-        def unit_scrn(self, i):
-                for s in eval("self.u"+str(i)):
-                    self.scrnBtn(s)
-                self.projBtn("Unit project: "+eval("self.pr"+str(i)), self.p_init(i))
-                if self.units[i]["started"]:
-                        Button(self, text="Unit"+str(i+1)+self.units[i].text, command=eval("self.u"+str(i+1))).place(relx=1.0, rely=1.0, anchor=SE)
-        
         def proj_1(self):
                 for s in self.p1:
                         self.cenBtn(s.showAs, s.func)
                 self.cenBtn("Back to unit 1", lambda: self.s_init(1))
-                self.cenBtn("Unit 2: Turtle graphics", None) #s_init(2)
+                self.cenBtn("Unit 2: Turtle graphics", self.s_init(2))
         
         def idle(self):
                 self.new_lesson(1, 1)
@@ -243,15 +244,15 @@ while i < 4:
             
         def bs_print_board(self):
                 self.new_proj(1, 3)
-                self.multiLbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take one argument, board and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. That is our command in the for loop.""")
+                self.multiLbl("""We need a method to print out the board good because we don't want it looking like [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'],['O', 'O', 'O', 'O', 'O']]. We want to join it. So the function called print_board which will take no arguments and will have a for loop in which we are doing a command *for row in board*. The command is a method I haven't told you about yet. It's called join. The syntax is like this: str.join(list). For example, we want to print O O O O O where it's currently printing ['O', 'O', 'O', 'O', 'O'] so we do " ".join(board) to join the board with spaces. We surround that with a print( and ) and then we have our print.""")
                 
         def bs_hide(self):
                 self.new_proj(1, 4)
-                self.multiLbl("""Let's "hide" the ship. To do this, we need to have a few lines of code. First we need to do this thing called import-ing. To import, you can either do import module_name or from module_name import what_you_want_from_the_module (or you can add as what_you_want_to_called). So we need to do a from module_name import what_you_want. We want to import randint from random. Soooo, just use your logic and from random import randint. Then you need to set a variable *col =* to a *randint* from *(0,* to *len(boardp[0])-1)* and set *row =* to a *randint* from *(0,* to *len(board)-1)*. Then you have the locations of the ship""")
+                self.multiLbl("""Let's "hide" the ship. To do this, we need to have a few lines of code. First we need to do this thing called import-ing. To import, you can either do import module_name or from module_name import what_you_want_from_the_module (or you can add as what_you_want_to_call_it). So we need to do a from module_name import what_you_want. We want to import randint from random. Soooo, just use your logic and from random import randint. Then you need to set a variable *col =* to a *randint* from *(0,* to *len(boarp[0])-1)* and set *row =* to a *randint* from *(0,* to *len(board)-1)*. Then you have the locations of the ship""")
 
         def bs_seek(self):
                 self.new_proj(1, 5)
-                self.multiLbl("""Let's "seek" the ship. To do this, we need to ask the user for *input()*. Let's set a variable called *row_guess =* to *input("Guess row: ") and set *col_guess =* to *input("Guess column")*. Then we have a guess that literally does nothing (so far).""")
+                self.multiLbl("""Let's "seek" the ship. To do this, we need to ask the user for *input()*. Let's set a variable called *row_guess =* to *input("Guess row: ") and set *col_guess =* to *input("Guess column: ")*. Then we have a guess that literally does nothing (so far).""")
 
         def bs_debug(self):
                 self.new_proj(1, 6)
