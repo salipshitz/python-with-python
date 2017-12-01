@@ -14,4 +14,4 @@ row_guess = input("Guess row: ")
 col_guess = input("Guess column: ")
 
 if row_guess == row and col_guess == col:
-    print("something like \\\"We have a winner\\\"")
+    print("something like \"We have a winner\"")
