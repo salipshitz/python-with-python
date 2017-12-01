@@ -7,3 +7,6 @@ def print_board:
 
 col = randint(0, len(board[0]))
 row = randint(0, len(board))
+
+row_guess = input("Guess row: ")
+col_guess = input("Guess column: ")
