@@ -8,7 +8,10 @@ def print_board:
 col = randint(0, len(board[0]))
 row = randint(0, len(board))
 
+print(row, col)
+
 row_guess = input("Guess row: ")
 col_guess = input("Guess column: ")
 
-print(row, col)
+if row_guess == row and col_guess == col:
+    print("something like \\\"We have a winner\\\"")
