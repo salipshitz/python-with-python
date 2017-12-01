@@ -263,4 +263,4 @@ while i < 4:
 
         def bs_lose(self):
                 self.new_proj(1, 8)
-                self.multiLbl("""To make a losing condition, we have to add an else. The else condition will be if he gets it wrong.""")
+                self.multiLbl("""To make a losing condition, we have to add an else. The else condition will be if the player gets it wrong.""")
